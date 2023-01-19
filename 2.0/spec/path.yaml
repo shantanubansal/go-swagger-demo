@@ -1,0 +1,16 @@
+paths:
+  /v1/authenticate:
+    $ref: './resources.yaml/#/paths/v1Authenticate'
+  /v1/userinfo:
+    $ref: './resources.yaml/#/paths/v1UserInfo'
+  /v1/cluster/overview:
+    $ref: './resources.yaml/#/paths/v1ClusterOverview'
+
+  /v1/cluster/events:
+    $ref: './resources.yaml/#/paths/v1ClusterEvents'
+  /v1/system/health/ping:
+    $ref: './resources.yaml/#/paths/V1SystemHealthPing'
+  /v1/cluster/dashboard:
+    $ref: './resources.yaml/#/paths/v1ClusterDashboard'
+  /v1/cloudconfig/aws:
+    $ref: './resources.yaml/#/paths/v1CloudConfigAws'

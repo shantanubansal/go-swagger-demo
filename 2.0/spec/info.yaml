@@ -1,0 +1,11 @@
+swagger: "2.0"
+info:
+  description: This is a Demo Project to demonstrate the usage of go-swagger with version
+  title: SwagApi
+  version: 1.0.0
+consumes:
+  - application/json
+produces:
+  - application/json
+schemes:
+  - http

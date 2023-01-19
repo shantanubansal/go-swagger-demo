@@ -1,0 +1,1357 @@
+definitions:
+  v1AuthLogin:
+    type: object
+    properties:
+      username:
+        type: string
+      password:
+        type: string
+        format: password
+  v1UserToken:
+    type: object
+    description: Auth token response
+    properties:
+      Authorization:
+        type: string
+  v1UserInfo:
+    type: object
+    description: Auth token response
+    properties:
+      metadata:
+        $ref: '#/definitions/metadata'
+      spec:
+        $ref: '#/definitions/spec'
+      status:
+        $ref: '#/definitions/status'
+  metadata:
+    type: object
+    description: Auth token response
+    properties:
+      name:
+        type: string
+      age:
+        type: string
+      dob:
+        $ref: '#/definitions/v1Time'
+      l1:
+        $ref: '#/definitions/l1'
+  l1:
+    type: object
+    description: Auth token response
+    properties:
+      name:
+        type: string
+      arr:
+        $ref: '#/definitions/arrSpec'
+      l2:
+        $ref: '#/definitions/l2'
+  l2:
+    type: object
+    description: Auth token response
+    properties:
+      name:
+        type: string
+      arr:
+        $ref: '#/definitions/arrSpec'
+      l3:
+        $ref: '#/definitions/l3'
+  l3:
+    type: object
+    description: Auth token response
+    properties:
+      name:
+        type: string
+      arr:
+        $ref: '#/definitions/arrSpec'
+      l4:
+        $ref: '#/definitions/l4'
+  l4:
+    type: object
+    description: Auth token response
+    properties:
+      name:
+        type: string
+      arr:
+        $ref: '#/definitions/arrSpec'
+      l5:
+        $ref: '#/definitions/l5'
+  l5:
+    type: object
+    description: Auth token response
+    properties:
+      name:
+        type: string
+      arr:
+        $ref: '#/definitions/arrSpec'
+      l6:
+        $ref: '#/definitions/l6'
+  l6:
+    type: object
+    description: Auth token response
+    properties:
+      name:
+        type: string
+      arr:
+        $ref: '#/definitions/arrSpec'
+      l7:
+        $ref: '#/definitions/l7'
+  l7:
+    type: object
+    description: Auth token response
+    properties:
+      name:
+        type: string
+      arr:
+        $ref: '#/definitions/arrSpec'
+      l8:
+        $ref: '#/definitions/l8'
+  l8:
+    type: object
+    description: Auth token response
+    properties:
+      name:
+        type: string
+      arr:
+        $ref: '#/definitions/arrSpec'
+      l7:
+        $ref: '#/definitions/l8'
+  arrSpec:
+    type: object
+    description: Auth token response
+    properties:
+      authType:
+        type: array
+        items:
+          type: string
+  spec:
+    type: object
+    description: Auth token response
+    properties:
+      authType:
+        type: string
+      isOwner:
+        type: boolean
+      isLocked:
+        type: boolean
+      isEnabled:
+        type: boolean
+  status:
+    type: object
+    description: Auth token response
+    properties:
+      modificationTime:
+        $ref: '#/definitions/v1Time'
+      creationTime:
+        $ref: '#/definitions/v1Time'
+      lastLogin:
+        $ref: '#/definitions/v1Time'
+
+  v1Time:
+    description: Time is a wrapper around time.Time which supports correct marshaling
+      to YAML and JSON.  Wrappers are provided for many of the factory methods that
+      the time package offers.
+    format: date-time
+    type: string
+
+  v1SystemHealthPing:
+    type: object
+    properties:
+      msg:
+        type: string
+  v1ClusterSummary:
+    description: Spectro cluster summary
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        description: Spectro cluster spec summary
+        properties:
+          clusterProfileTemplates:
+            type: array
+            items:
+              $ref: '#/definitions/v1ClusterProfileTemplateMeta'
+          clusterProfileTemplate:
+            $ref: '#/definitions/v1ClusterProfileTemplateMeta'
+          cloudConfig:
+            $ref: '#/definitions/v1CloudConfigMeta'
+          cloudaccount:
+            $ref: '#/definitions/v1CloudAccountMeta'
+        type: object
+      status:
+        $ref: '#/definitions/v1SpectroClusterUidStatusSummary'
+    type: object
+  v1ObjectMeta:
+    description: ObjectMeta is metadata that all persisted resources must have, which
+      includes all objects users must create.
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: 'Annotations is an unstructured key value map stored with a resource
+          that may be set by external tools to store and retrieve arbitrary metadata.
+          They are not queryable and should be preserved when modifying objects. More
+          info: http://kubernetes.io/docs/user-guide/annotations'
+        type: object
+      creationTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: |-
+          CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata
+      lastModifiedTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: |-
+          LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata
+      deletionTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: |-
+          DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.
+
+          Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Map of string keys and values that can be used to organize and
+          categorize (scope and select) objects. May match selectors of replication
+          controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+        type: object
+      name:
+        description: 'Name must be unique within a namespace. Is required when creating
+          resources, although some resources may allow a client to request the generation
+          of an appropriate name automatically. Name is primarily intended for creation
+          idempotence and configuration definition. Cannot be updated. More info:
+          http://kubernetes.io/docs/user-guide/identifiers#names'
+        type: string
+      namespace:
+        description: |-
+          Namespace defines the space within each name must be unique. An empty namespace is equivalent to the "default" namespace, but "default" is the canonical representation. Not all objects are required to be scoped to a namespace - the value of this field for those objects will be empty.
+
+          Must be a DNS_LABEL. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/namespaces
+        type: string
+      resourceVersion:
+        description: |-
+          An opaque value that represents the internal version of this object that can be used by clients to determine when objects have changed. May be used for optimistic concurrency, change detection, and the watch operation on a resource or set of resources. Clients must treat these values as opaque and passed unmodified back to the server. They may only be valid for a particular resource or set of resources.
+
+          Populated by the system. Read-only. Value must be treated as opaque by clients and . More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#concurrency-control-and-consistency
+        type: string
+      selfLink:
+        description: SelfLink is a URL representing this object. Populated by the
+          system. Read-only.
+        type: string
+      uid:
+        description: |-
+          UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+          Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids
+        type: string
+    type: object
+  v1ClusterProfileTemplateMeta:
+    description: Cluster profile template meta information
+    properties:
+      uid:
+        type: string
+      name:
+        type: string
+      type:
+        type: string
+      packs:
+        items:
+          $ref: '#/definitions/v1PackRef'
+        type: array
+      version:
+        type: integer
+        format: int32
+      cloudType:
+        $ref: '#/definitions/v1CloudType'
+    type: object
+  v1PackRef:
+    description: PackRef server/name:tag to point to a pack PackRef is used when construct a ClusterProfile PackSpec is used for UI to render the parameters form ClusterProfile will not know inner details of a pack ClusterProfile only contain pack name:tag, and the param values user entered for it
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: Annotations is used to allow packref to add more arbitrary information one example is to add git reference for values.yaml
+        type: object
+      digest:
+        description: digest is used to specify the version should be installed by palette when pack upgrade available, change this digest to trigger upgrade
+        type: string
+      layer:
+        enum:
+          - kernel
+          - os
+          - k8s
+          - cni
+          - csi
+          - addon
+        type: string
+      name:
+        description: pack name
+        type: string
+      packUid:
+        description: PackUID is Hubble packUID, not palette Pack.UID It is used by
+          Hubble only.
+        type: string
+      params:
+        additionalProperties:
+          type: string
+        description: params passed as env variables to be consumed at installation time
+        type: object
+      server:
+        description: pack registry server or helm repo
+        type: string
+      registryUid:
+        description: pack registry uid
+        type: string
+      tag:
+        description: pack tag
+        type: string
+      type:
+        description: type of the pack
+        enum:
+          - spectro
+          - helm
+          - manifest
+        type: string
+      version:
+        description: pack version
+        type: string
+      values:
+        description: values represents the values.yaml used as input parameters either
+          Params OR Values should be used, not both If both applied at the same time,
+          will only use Values
+        type: string
+      schema:
+        items:
+          $ref: '#/definitions/v1PackSchema'
+        type: array
+      presets:
+        items:
+          $ref: '#/definitions/v1PackPreset'
+        type: array
+      isInvalid:
+        description: pack is invalid when the associated tag is deleted from the registry
+        type: boolean
+      inValidReason:
+        type: string
+      manifests:
+        items:
+          $ref: '#/definitions/v1ObjectReference'
+        type: array
+    required:
+      - layer
+      - name
+    type: object
+  v1PackSchema:
+    description: PackSchema defines the schema definition, hints for the pack values
+    properties:
+      name:
+        type: string
+        x-omitempty: false
+      type:
+        type: string
+        x-omitempty: false
+      required:
+        type: boolean
+        x-omitempty: false
+      readonly:
+        type: boolean
+        x-omitempty: false
+      format:
+        type: string
+        x-omitempty: false
+      regex:
+        type: string
+        x-omitempty: false
+      listOptions:
+        items:
+          type: string
+        type: array
+        x-omitempty: false
+      hints:
+        items:
+          type: string
+        type: array
+        x-omitempty: false
+    type: object
+  v1PackPreset:
+    description: PackPreset defines the preset pack values
+    properties:
+      name:
+        type: string
+        x-omitempty: false
+      displayName:
+        type: string
+        x-omitempty: false
+      group:
+        type: string
+        x-omitempty: false
+      add:
+        type: string
+        x-omitempty: false
+      remove:
+        items:
+          type: string
+        type: array
+        x-omitempty: false
+    type: object
+  v1CloudType:
+    type: string
+    enum:
+      - all
+      - aws
+      - azure
+      - gcp
+      - vsphere
+      - openstack
+      - maas
+      - nested
+      - baremetal
+      - eks
+      - aks
+      - edge
+      - edge-native
+      - libvirt
+      - tencent
+      - tke
+      - coxedge
+      - generic
+    default: all
+
+  v1CloudConfigMeta:
+    properties:
+      machinePools:
+        description: Machine pool meta information
+        items:
+          $ref: '#/definitions/v1MachinePoolMeta'
+        type: array
+      cloudType:
+        $ref: '#/definitions/v1CloudType'
+    type: object
+  v1MachinePoolMeta:
+    properties:
+      infraProfileTemplate:
+        $ref: '#/definitions/v1ClusterProfileTemplateMeta'
+        description: InfraClusterProfile contains OS/Kernel for this NodePool
+      labels:
+        description: 'labels for this pool, example: master/worker, gpu, windows'
+        items:
+          type: string
+        type: array
+      size:
+        description: size of the pool, number of machines
+        format: int32
+        type: integer
+        x-omitempty: false
+      healthy:
+        description: number of healthy machines
+        format: int32
+        type: integer
+        x-omitempty: false
+      cloudType:
+        $ref: '#/definitions/v1CloudType'
+    type: object
+  v1CloudAccountMeta:
+    description: Cloud account meta information
+    properties:
+      uid:
+        type: string
+      name:
+        type: string
+    type: object
+  v1SpectroClusterUidStatusSummary:
+    description: Spectro cluster status summary
+    properties:
+      addOnServices:
+        items:
+          $ref: '#/definitions/v1SpectroClusterAddOnServiceSummary'
+        type: array
+      metrics:
+        $ref: '#/definitions/v1SpectroClusterMetrics'
+      apiEndpoints:
+        items:
+          $ref: '#/definitions/v1APIEndpoint'
+        type: array
+      conditions:
+        items:
+          $ref: '#/definitions/v1ClusterCondition'
+        type: array
+      services:
+        items:
+          $ref: '#/definitions/v1LoadBalancerService'
+        type: array
+      state:
+        description: current operational state
+        type: string
+      health:
+        $ref: '#/definitions/v1SpectroClusterHealthStatus'
+      clusterImport:
+        $ref: '#/definitions/v1ClusterImport'
+      nested:
+        $ref: '#/definitions/v1Nested'
+      cost:
+        $ref: '#/definitions/v1ResourceCost'
+      hourlyRate:
+        $ref: '#/definitions/v1ResourceCost'
+      kubeMeta:
+        $ref: '#/definitions/v1KubeMeta'
+      upgrades:
+        items:
+          $ref: '#/definitions/v1Upgrades'
+        type: array
+      workspaces:
+        type: array
+        items:
+          $ref: '#/definitions/v1ResourceReference'
+      abortTimestamp:
+        $ref: '#/definitions/v1Time'
+      spcApply:
+        $ref: '#/definitions/v1SpcApply'
+      location:
+        $ref: '#/definitions/v1ClusterMetaSpecLocation'
+      packs:
+        type: array
+        items:
+          $ref: '#/definitions/v1ClusterPackStatus'
+  v1SpectroClusterAddOnServiceSummary:
+    description: Spectro cluster status summary
+    properties:
+      name:
+        type: string
+      endpoint:
+        type: string
+  v1SpectroClusterMetrics:
+    description: Spectro cluster metrics
+    properties:
+      cpu:
+        $ref: '#/definitions/v1ComputeMetrics'
+      memory:
+        $ref: '#/definitions/v1ComputeMetrics'
+  v1ComputeMetrics:
+    description: Compute metrics
+    properties:
+      limit:
+        type: number
+        x-omitempty: false
+      request:
+        type: number
+        x-omitempty: false
+      usage:
+        type: number
+        x-omitempty: false
+      total:
+        type: number
+        x-omitempty: false
+      unit:
+        type: string
+      lastUpdatedTime:
+        $ref: '#/definitions/v1Time'
+    type: object
+  v1APIEndpoint:
+    description: APIEndpoint represents a reachable Kubernetes API endpoint.
+    properties:
+      host:
+        description: The hostname on which the API server is serving.
+        type: string
+      port:
+        description: The port on which the API server is serving.
+        format: int32
+        type: integer
+    required:
+      - host
+      - port
+    type: object
+  v1ClusterCondition:
+    properties:
+      lastProbeTime:
+        $ref: '#/definitions/v1Time'
+      lastTransitionTime:
+        $ref: '#/definitions/v1Time'
+      message:
+        description: Human-readable message indicating details about last transition.
+        type: string
+      reason:
+        description: Unique, one-word, CamelCase reason for the condition's last transition.
+        type: string
+      status:
+        type: string
+      type:
+        type: string
+    required:
+      - type
+      - status
+    type: object
+  v1ServicePort:
+    properties:
+      port:
+        description: The port that will be exposed by this service.
+        format: int32
+        type: integer
+      protocol:
+        type: string
+    required:
+      - port
+    type: object
+  v1LoadBalancerService:
+    properties:
+      host:
+        description: IP or Host from svc.Status.LoadBalancerStatus.Ingress
+        type: string
+      name:
+        description: name of the loadbalancer service
+        type: string
+      ports:
+        description: port this service exposed
+        items:
+          $ref: '#/definitions/v1ServicePort'
+        type: array
+  v1SpectroClusterHealthStatus:
+    description: Spectro cluster health status
+    properties:
+      state:
+        type: string
+      conditions:
+        type: array
+        uniqueItems: true
+        items:
+          $ref: '#/definitions/v1SpectroClusterHealthCondition'
+      lastHeartBeatTimestamp:
+        $ref: '#/definitions/v1Time'
+      agentVersion:
+        type: string
+  v1SpectroClusterHealthCondition:
+    description: Spectro cluster health condition
+    properties:
+      relatedObject:
+        type: object
+        $ref: '#/definitions/v1RelatedObject'
+      type:
+        type: string
+      message:
+        type: string
+  v1CloudCost:
+    description: Cloud cost information
+    type: object
+    properties:
+      compute:
+        type: number
+        format: float64
+        x-omitempty: false
+      storage:
+        type: number
+        format: float64
+        x-omitempty: false
+      total:
+        type: number
+        format: float64
+        x-omitempty: false
+  v1ClusterImport:
+    properties:
+      isBrownfield:
+        type: boolean
+        description: Deprecated. Use the 'spec.clusterType'
+        x-omitempty: false
+      importLink:
+        description: import link to download and install ally-lite, palette-lite
+        type: string
+      state:
+        description: cluster import status
+        type: string
+    type: object
+  v1Nested:
+    properties:
+      state:
+        description: cluster nested host status
+        type: string
+      hostCluster:
+        description: host cluster reference
+        $ref: '#/definitions/v1ObjectReference'
+      nestedClusters:
+        description: list of nested clusters deployed on the cluster
+        type: array
+        items:
+          $ref: '#/definitions/v1ObjectReference'
+  v1ObjectReference:
+    description: ObjectReference contains enough information to let you inspect or
+      modify the referred object.
+    properties:
+      apiVersion:
+        description: API version of the referent.
+        type: string
+      fieldPath:
+        description: 'If referring to a piece of an object instead of an entire object,
+          this string should contain a valid JSON/Go field access statement, such
+          as desiredState.manifest.containers[2]. For example, if the object reference
+          is to a container within a pod, this would take on a value like: "spec.containers{name}"
+          (where "name" refers to the name of the container that triggered the event)
+          or if no container name is specified "spec.containers[2]" (container with
+          index 2 in this pod). This syntax is chosen only to have some well-defined
+          way of referencing a part of an object.'
+        type: string
+      kind:
+        description: 'Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
+        type: string
+      name:
+        description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
+        type: string
+      namespace:
+        description: 'Namespace of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/'
+        type: string
+      resourceVersion:
+        description: 'Specific resourceVersion to which this reference is made, if
+          any. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#concurrency-control-and-consistency'
+        type: string
+      uid:
+        description: 'UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids'
+        type: string
+    type: object
+  v1ResourceCost:
+    description: Resource Cost information
+    properties:
+      cloud:
+        $ref: '#/definitions/v1CloudCost'
+      total:
+        type: number
+        format: float64
+        x-omitempty: false
+    type: object
+  v1ClusterPackStatus:
+    properties:
+      name:
+        type: string
+      version:
+        type: string
+      profileUid:
+        type: string
+      type:
+        type: string
+      startTime:
+        $ref: '#/definitions/v1Time'
+      endTime:
+        $ref: '#/definitions/v1Time'
+      condition:
+        $ref: '#/definitions/v1ClusterCondition'
+      manifests:
+        type: array
+        items:
+          $ref: '#/definitions/v1ClusterPackManifestStatus'
+      services:
+        type: array
+        items:
+          $ref: '#/definitions/v1LoadBalancerService'
+    type: object
+  v1ClusterPackManifestStatus:
+    properties:
+      name:
+        type: string
+      uid:
+        type: string
+      condition:
+        $ref: '#/definitions/v1ClusterCondition'
+    type: object
+  v1ClusterLocation:
+    description: Cluster location information
+    type: object
+    properties:
+      countryCode:
+        type: string
+      countryName:
+        type: string
+      regionCode:
+        type: string
+      regionName:
+        type: string
+      geoLoc:
+        $ref: '#/definitions/v1GeolocationLatlong'
+  v1ClusterMetaSpecLocation:
+    description: Cluster location information
+    properties:
+      countryCode:
+        type: string
+      countryName:
+        type: string
+      regionCode:
+        type: string
+      regionName:
+        type: string
+      coordinates:
+        type: array
+        items:
+          type: number
+          format: float64
+    type: object
+  v1SpcApply:
+    properties:
+      actionType:
+        type: string
+        enum:
+          - DownloadAndInstall
+          - DownloadAndInstallLater
+      canBeApplied:
+        type: boolean
+        description: If it is true then Agent can apply the changes to the palette
+        x-omitempty: false
+      lastModifiedTime:
+        $ref: '#/definitions/v1Time'
+      patchAppliedTime:
+        $ref: '#/definitions/v1Time'
+    type: object
+  v1ResourceReference:
+    type: object
+    required:
+      - uid
+    properties:
+      uid:
+        type: string
+      name:
+        type: string
+      kind:
+        type: string
+  v1Upgrades:
+    description: Upgrades represent the reason of the last upgrade that took place
+    properties:
+      reason:
+        items:
+          type: string
+        type: array
+      timestamp:
+        $ref: '#/definitions/v1Time'
+    type: object
+  v1KubeMeta:
+    description: Spectro cluster kube meta
+    type: object
+    properties:
+      hasKubeConfig:
+        type: boolean
+        x-omitempty: false
+      hasManifest:
+        type: boolean
+        x-omitempty: false
+      hasKubeConfigClient:
+        type: boolean
+        x-omitempty: false
+      kubernetesVersion:
+        type: string
+  v1GeolocationLatlong:
+    description: Geolocation Latlong
+    type: object
+    properties:
+      latitude:
+        type: number
+        format: float64
+        x-omitempty: false
+      longitude:
+        type: number
+        format: float64
+        x-omitempty: false
+  v1RelatedObject:
+    description: The object for which the event is related
+    properties:
+      uid:
+        type: string
+      kind:
+        type: string
+        enum:
+          - spectrocluster
+          - machine
+          - cloudconfig
+          - clusterprofile
+          - pack
+      name:
+        type: string
+    type: object
+  v1ClusterOverviewEntity:
+    type: object
+    properties:
+      uid:
+        type: string
+      name:
+        type: string
+  v1ClusterK8sDashboardRedirectURI:
+    type: object
+    properties:
+      redirectUri:
+        type: string
+  v1ClusterEvents:
+    type: object
+    required:
+      - items
+    properties:
+      items:
+        type: array
+        uniqueItems: true
+        items:
+          $ref: '#/definitions/v1Event'
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+  v1ListMetaData:
+    description: ListMeta describes metadata for the resource listing
+    properties:
+      limit:
+        x-omitempty: false
+        description: Number of records feteched
+        type: integer
+      offset:
+        x-omitempty: false
+        description: The next offset for the pagination. Starting index for which next request will be placed.
+        type: integer
+      continue:
+        x-omitempty: false
+        description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
+        type: string
+      count:
+        x-omitempty: false
+        description: Total count of the resources which might change during pagination based on the resources addition or deletion
+        type: integer
+    type: object
+  v1Event:
+    description: Event information organized by tags
+    properties:
+      involvedObject:
+        type: object
+        $ref: '#/definitions/v1ObjectReference'
+      relatedObject:
+        type: object
+        $ref: '#/definitions/v1RelatedObject'
+      message:
+        type: string
+      metadata:
+        type: object
+        $ref: '#/definitions/v1ObjectMeta'
+      reason:
+        type: string
+      source:
+        type: object
+        $ref: '#/definitions/v1EventSource'
+      severity:
+        type: string
+    type: object
+  v1EventSource:
+    description: Event source info
+    properties:
+      component:
+        type: string
+      host:
+        type: string
+    type: object
+
+  ## Cloud Config
+  v1EksCloudConfig:
+    description: EksCloudConfig is the Schema for the ekscloudconfigs API
+    properties:
+      apiVersion:
+        description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+        type: string
+      kind:
+        description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+        type: string
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1EksCloudConfigSpec'
+  v1EksCloudConfigSpec:
+    description: EksCloudConfigSpec defines the cloud configuration input by user
+    properties:
+      cloudAccountRef:
+        $ref: '#/definitions/v1ObjectReference'
+        description: cloudAccountRef should point to the secret which contains EksCloudAccount
+      clusterConfig:
+        $ref: '#/definitions/v1EksClusterConfig'
+      fargateProfiles:
+        items:
+          $ref: '#/definitions/v1FargateProfile'
+        type: array
+      machinePoolConfig:
+        items:
+          $ref: '#/definitions/v1EksMachinePoolConfig'
+        type: array
+    type: object
+  v1EksClusterConfig:
+    description: EksClusterConfig defines EKS specific config
+    properties:
+      addons:
+        description: Addons defines the EKS addons to enable with the EKS cluster. This may be required for brownfield clusters
+        items:
+          $ref: '#/definitions/v1EksAddon'
+        type: array
+      encryptionConfig:
+        $ref: '#/definitions/v1EncryptionConfig'
+        description: EncryptionConfig specifies the encryption configuration for the cluster
+      endpointAccess:
+        $ref: '#/definitions/v1EksClusterConfigEndpointAccess'
+        description: Endpoints specifies access to this cluster's control plane endpoints
+      bastionDisabled:
+        description: BastionDisabled is the option to disable bastion node
+        type: boolean
+      region:
+        description: The AWS Region the cluster lives in.
+        type: string
+      sshKeyName:
+        description: SSHKeyName specifies which EC2 SSH key can be used to access machines.
+        type: string
+      controlPlaneLoadBalancer:
+        description: ControlPlaneLoadBalancer specifies how API server elb will be configured, this field is optional, not provided, "", default => "Internet-facing" "Internet-facing" => "Internet-facing" "internal" => "internal" For spectro saas setup we require to talk to the apiserver from our cluster so ControlPlaneLoadBalancer should be "", not provided or "Internet-facing"
+        type: string
+      vpcId:
+        description: VPC Id to deploy cluster into should have one public and one private subnet for the the cluster creation, this field is optional, If VPC Id is not provided a fully managed VPC will be created
+        type: string
+    required:
+      - region
+    type: object
+  v1EksClusterConfigEndpointAccess:
+    description: EndpointAccess specifies how control plane endpoints are accessible
+    properties:
+      private:
+        description: Private points VPC-internal control plane access to the private endpoint
+        type: boolean
+      public:
+        description: Public controls whether control plane endpoints are publicly accessible
+        type: boolean
+      publicCIDRs:
+        description: PublicCIDRs specifies which blocks can access the public endpoint
+        items:
+          type: string
+        type: array
+    type: object
+  v1EncryptionConfig:
+    description: EncryptionConfig specifies the encryption configuration for the EKS clsuter.
+    properties:
+      isEnabled:
+        description: Is encryption configuration enabled for the cluster
+        type: boolean
+      provider:
+        description: Provider specifies the ARN or alias of the CMK (in AWS KMS)
+        type: string
+      resources:
+        description: Resources specifies the resources to be encrypted
+        items:
+          type: string
+        type: array
+    type: object
+  v1EndpointAccess:
+    description: EndpointAccess specifies how control plane endpoints are accessible
+    properties:
+      private:
+        description: Private points VPC-internal control plane access to the private endpoint
+        type: boolean
+      public:
+        description: Public controls whether control plane endpoints are publicly accessible
+        type: boolean
+      publicCIDRs:
+        description: PublicCIDRs specifies which blocks can access the public endpoint
+        items:
+          type: string
+        type: array
+    type: object
+  v1FargateProfile:
+    description: FargateProfile defines the desired state of FargateProfile
+    properties:
+      additionalTags:
+        additionalProperties:
+          type: string
+        description: AdditionalTags is an optional set of tags to add to AWS resources managed by the AWS provider, in addition to the ones added by default.
+        type: object
+      name:
+        description: name specifies the profile name.
+        type: string
+      selectors:
+        description: Selectors specify fargate pod selectors.
+        items:
+          $ref: '#/definitions/v1FargateSelector'
+        type: array
+      subnetIds:
+        description: SubnetIDs specifies which subnets are used for the auto scaling group of this nodegroup.
+        items:
+          type: string
+        type: array
+    required:
+      - name
+    type: object
+  v1FargateSelector:
+    description: FargateSelector specifies a selector for pods that should run on this fargate pool
+    properties:
+      labels:
+        additionalProperties:
+          type: string
+        description: Labels specifies which pod labels this selector should match.
+        type: object
+      namespace:
+        description: Namespace specifies which namespace this selector should match.
+        type: string
+    required:
+      - namespace
+    type: object
+  v1EksAddon:
+    description: EksAddon represents a EKS addon
+    properties:
+      conflictResolution:
+        description: ConflictResolution is used to declare what should happen if there are parameter conflicts.
+        type: string
+      name:
+        description: Name is the name of the addon
+        type: string
+      serviceAccountRoleARN:
+        description: ServiceAccountRoleArn is the ARN of an IAM role to bind to the addons service account
+        type: string
+      version:
+        description: Version is the version of the addon to use
+        type: string
+    required:
+      - name
+      - version
+    type: object
+
+  v1EksMachinePoolConfig:
+    properties:
+      machines:
+        type: array
+        items:
+          $ref: '#/definitions/v1AwsMachine'
+      additionalLabels:
+        description: additionalLabels
+        type: object
+        additionalProperties:
+          type: string
+      taints:
+        description: master or worker taints
+        type: array
+        uniqueItems: true
+        items:
+          $ref: '#/definitions/v1Taint'
+      additionalTags:
+        additionalProperties:
+          type: string
+        description: AdditionalTags is an optional set of tags to add to resources managed by the provider, in addition to the ones added by default. For eg., tags for EKS nodeGroup or EKS NodegroupIAMRole
+        type: object
+      azs:
+        description: AZs is only used for dynamic placement
+        items:
+          type: string
+        type: array
+      infraProfileRef:
+        $ref: '#/definitions/v1ObjectReference'
+        description: InfraProfileRef point to the ClusterProfile which contains InfraProfileTemplate
+      infraProfileTemplate:
+        $ref: '#/definitions/v1ClusterProfileTemplate'
+        description: InfraProfile contains OS/Kernel for this NodePool
+      instanceType:
+        description: instance type
+        type: string
+      isControlPlane:
+        description: whether this pool is for control plane
+        type: boolean
+        x-omitempty: false
+      labels:
+        description: 'labels for this pool, example: master/worker, gpu, windows'
+        items:
+          type: string
+        type: array
+      maxSize:
+        description: max size of the pool, for scaling
+        format: int32
+        type: integer
+      minSize:
+        description: min size of the pool, for scaling
+        format: int32
+        type: integer
+      name:
+        type: string
+      rootDeviceSize:
+        description: rootDeviceSize in GBs
+        format: int64
+        type: integer
+      size:
+        description: size of the pool, number of machines
+        format: int32
+        type: integer
+      capacityType:
+        description: EC2 instance capacity type
+        enum:
+          - on-demand
+          - spot
+        type: string
+        default: on-demand
+      spotMarketOptions:
+        $ref: '#/definitions/v1SpotMarketOptions'
+        description: SpotMarketOptions allows users to configure instances to be run using AWS Spot instances.
+      subnetIds:
+        additionalProperties:
+          type: string
+        description: AZ to subnet mapping filled by ally from hubble SubnetIDs ["us-west-2d"] = "subnet-079b6061" This field is optional If we don't provide a subnetId then by default the first private subnet from the AZ will be picked up for deployment
+        type: object
+      updateStrategy:
+        $ref: '#/definitions/v1UpdateStrategy'
+        description: rolling update strategy for this machinepool if not specified, will use ScaleOut
+      useControlPlaneAsWorker:
+        description: if IsControlPlane==true && useControlPlaneAsWorker==true, then will remove master taint this will not be used for worker pools
+        type: boolean
+        x-omitempty: false
+    required:
+      - isControlPlane
+    type: object
+  v1Taint:
+    description: Taint
+    properties:
+      key:
+        description: The taint key to be applied to a node
+        type: string
+      value:
+        description: The taint value corresponding to the taint key.
+        type: string
+      effect:
+        enum:
+          - NoSchedule
+          - PreferNoSchedule
+          - NoExecute
+        type: string
+      timeAdded:
+        $ref: '#/definitions/v1Time'
+    type: object
+  v1ClusterProfileTemplate:
+    description: ClusterProfileTemplate contains details of a clusterprofile definition
+    properties:
+      uid:
+        type: string
+      name:
+        type: string
+      cloudType:
+        $ref: '#/definitions/v1CloudType'
+      packServerRefs:
+        description: PackServerRefs is only used on Hubble side it is reference to pack registry servers which PackRef belongs to in hubble, pack server is a top level object, so use a reference to point to it packs within a clusterprofile can come from different pack servers, so this is an array
+        items:
+          $ref: '#/definitions/v1ObjectReference'
+        type: array
+      packServerSecret:
+        description: This secret is used only on Palette side use case is similar  to k8s image pull secret this single secret internally should contains all the pack servers in PackServerRefs if empty, means no credential is needed to access the pack server For spectro saas, Ally will set this field before pass to palette
+        type: string
+      packs:
+        description: Packs definitions here are final definitions. If ClonedFrom and ParamsOverwrite is present, then Packs are the final merge result of ClonedFrom and ParamsOverwrite So orchestration engine will just take the Packs and do the work, no need to worry about parameters merge
+        items:
+          $ref: '#/definitions/v1PackRef'
+        type: array
+      type:
+        type: string
+      version:
+        description: Deprecated. Use profileVersion
+        format: int32
+        type: integer
+      profileVersion:
+        description: version start from 1.0.0, matching the index of ClusterProfileSpec.Versions[] will be used by clusterSpec to identify which version is applied to the cluster
+        type: string
+    type: object
+  v1UpdateStrategy:
+    description: UpdatesStrategy will be used to translate to RollingUpdateStrategy of a MachineDeployment We'll start with default values for the translation, can expose more details later Following is details of parameters translated from the type ScaleOut => maxSurge=1, maxUnavailable=0 ScaleIn => maxSurge=0, maxUnavailable=1
+    properties:
+      type:
+        description: update strategy, either ScaleOut or ScaleIn if empty, will default to RollingUpdateScaleOut
+        type: string
+        enum:
+          - RollingUpdateScaleOut
+          - RollingUpdateScaleIn
+    type: object
+  v1SpotMarketOptions:
+    description: SpotMarketOptions defines the options available to a user when configuring Machines to run on Spot instances. Most users should provide an empty struct.
+    properties:
+      maxPrice:
+        description: MaxPrice defines the maximum price the user is willing to pay for Spot VM instances
+        type: string
+    type: object
+  v1AwsMachine:
+    description: AWS cloud VM definition
+    properties:
+      apiVersion:
+        type: string
+      kind:
+        type: string
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1AwsMachineSpec'
+      status:
+        $ref: '#/definitions/v1CloudMachineStatus'
+  v1AwsMachineSpec:
+    description: AWS cloud VM definition spec
+    properties:
+      phase:
+        type: string
+      type:
+        type: string
+      instanceType:
+        type: string
+      vpcId:
+        type: string
+      subnetId:
+        type: string
+      az:
+        type: string
+      sshKeyName:
+        type: string
+      ami:
+        type: string
+      iamProfile:
+        type: string
+      dnsName:
+        type: string
+      nics:
+        type: array
+        items:
+          $ref: '#/definitions/v1AwsNic'
+    required:
+      - instanceType
+      - vpcId
+      - ami
+    type: object
+  v1AwsNic:
+    description: AWS network interface
+    properties:
+      privateIPs:
+        type: array
+        items:
+          type: string
+      publicIp:
+        type: string
+      index:
+        type: integer
+        format: int8
+    type: object
+  v1CloudMachineStatus:
+    description: cloud machine status
+    type: object
+    properties:
+      instanceState:
+        type: string
+        enum:
+          - Pending
+          - Provisioning
+          - Provisioned
+          - Running
+          - Deleting
+          - Deleted
+          - Failed
+          - Unknown
+      health:
+        $ref: '#/definitions/v1MachineHealth'
+  #Machine health status
+  v1MachineHealth:
+    description: Machine health state
+    properties:
+      state:
+        type: string
+      conditions:
+        type: array
+        items:
+          $ref: '#/definitions/v1MachineHealthCondition'
+    type: object
+  v1MachineHealthCondition:
+    description: Machine health condition
+    properties:
+      type:
+        type: string
+      reason:
+        type: string
+      message:
+        type: string
+      status:
+        type: string
+    type: object

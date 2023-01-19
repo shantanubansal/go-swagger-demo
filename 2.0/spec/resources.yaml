@@ -1,0 +1,84 @@
+paths:
+  v1Authenticate:
+    post:
+      tags: [ 'v1' ]
+      operationId: v1Authenticate
+      summary: Authenticates the user for the specified credentials
+      description: Authenticates the user
+      parameters:
+        - name: setCookie
+          type: boolean
+          default: true
+          in: query
+        - name: body
+          in: body
+          schema:
+            $ref: './models.yaml/#/definitions/v1AuthLogin'
+          required: true
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: './models.yaml/#/definitions/v1UserToken'
+  v1UserInfo:
+    get:
+      tags: [ 'v1' ]
+      operationId: v1UserInfo
+      summary: Returns the userinfo
+      description: Authenticates the user
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: './models.yaml/#/definitions/v1UserInfo'
+  v1ClusterOverview:
+    get:
+      tags: [ 'v1' ]
+      operationId: v1ClusterOverview
+      responses:
+        '200':
+          description: An array of component event items
+          schema:
+            $ref: './models.yaml/#/definitions/v1ClusterOverviewEntity'
+  v1ClusterEvents:
+    get:
+      tags: [ 'v1' ]
+      operationId: v1ClusterEvents
+      responses:
+        '200':
+          description: An array of component event items
+          schema:
+            $ref: './models.yaml/#/definitions/v1ClusterEvents'
+  V1SystemHealthPing:
+    get:
+      description: Ping Service
+      tags:
+        - v1
+        - private
+      summary: Ping Service
+      operationId: V1SystemHealthPing
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: './models.yaml/#/definitions/v1SystemHealthPing'
+  v1ClusterDashboard:
+    get:
+      tags: [ 'v1' ]
+      operationId: v1ClusterDashboard
+      summary: Returns the specified cluster summary
+      responses:
+        '200':
+          description: An spectro cluster summary
+          schema:
+            $ref: './models.yaml/#/definitions/v1ClusterSummary'
+  v1CloudConfigAws:
+    get:
+      tags: [ 'v1' ]
+      operationId: v1CloudConfigAws
+      summary: Returns the specified cluster cloud config
+      responses:
+        '200':
+          description: An spectro cluster cloudconfig
+          schema:
+            $ref: './models.yaml/#/definitions/v1EksCloudConfig'
